@@ -3,11 +3,15 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
+GET     /home                       controllers.HomeController.index
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
-GET     /message                    controllers.AsyncController.message
+GET     /async                      controllers.AsyncController.message
+GET     /async10ms                  controllers.AsyncController.message10ms
+
+GET     /                           controllers.HomeController.index
+GET     /10ms                       controllers.HomeController.index10ms
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

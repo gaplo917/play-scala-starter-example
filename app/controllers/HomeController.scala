@@ -17,7 +17,10 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
    * a path of `/`.
    */
   def index = Action {
-    Ok(views.html.index("Your new application is ready."))
+    Ok("OK")
   }
-
+  def index10ms = Action {
+    Thread.sleep(10)
+    Ok("OK")
+  }
 }

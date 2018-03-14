@@ -35,13 +35,17 @@ class AsyncController @Inject()(cc: ControllerComponents, actorSystem: ActorSyst
    * a path of `/message`.
    */
   def message = Action.async {
-    getFutureMessage(1.second).map { msg => Ok(msg) }
+    Future.successful(Ok("OK"))
+  }
+
+  def message10ms = Action.async {
+    getFutureMessage(10.milliseconds).map(Ok(_))
   }
 
   private def getFutureMessage(delayTime: FiniteDuration): Future[String] = {
     val promise: Promise[String] = Promise[String]()
     actorSystem.scheduler.scheduleOnce(delayTime) {
-      promise.success("Hi!")
+      promise.success("OK")
     }(actorSystem.dispatcher) // run scheduled tasks using the actor system's dispatcher
     promise.future
   }
